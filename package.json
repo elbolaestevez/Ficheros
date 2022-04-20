@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "firebase-admin": "^10.0.2",
+    "mongoose": "^6.3.0",
+    "multer": "^1.4.4",
+    "multer-firebase-storage": "^3.0.3",
+    "pug": "^3.0.2",
+    "uuid": "^8.3.2",
+    "xhr2": "^0.2.1"
+  },
+  "name": "ficheros",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elbolaestevez/Ficheros.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elbolaestevez/Ficheros/issues"
+  },
+  "homepage": "https://github.com/elbolaestevez/Ficheros#readme"
+}
