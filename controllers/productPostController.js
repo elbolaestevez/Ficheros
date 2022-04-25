@@ -1,46 +1,44 @@
-const Product = require("../models/product");
-const express=require('express');
-const firebaseAdmin = require('firebase-admin');
-const { v4: uuidv4 } = require('uuid');
-const serviceAccount = require('../json/prueba-web-3b003-firebase-adminsdk-v943d-27466bece5.json');
-const admin = firebaseAdmin.initializeApp({
-  credential: firebaseAdmin.credential.cert(serviceAccount),
-})
-const storageRef = admin.storage().bucket(`gs://prueba-web-3b003.appspot.com`);
+const Product = require('../models/product')
+// const express=require('express');
+// const firebase = require("../firebase")
+// const multer = require('multer')
 
-
+// const upload = multer({
+//   storage: multer.memoryStorage()
+// })
 
 const createProduct = async (req, res) => {
- 
-    try {
-     
-      const product = await new Product(req.body)
-      await product.save();
-      
-      res.status(200).send({ message: "product created successfully" });
-      
-    } catch (err) {
-      res.status(400).json({ error: err });
-    }
-  };
+  try {
+    const { firebaseUrl } = req.file || ''
+    req.body.image = firebaseUrl
+    console.log(req.body)
+    const product = await new Product(req.body)
+    await product.save()
+    // const blob = firebase.bucket.file(req.file.originalname)
 
- const uploadphoto= async (req, res) =>  {
-  const file = req.body.file
-  console.log(file);
-  return storageRef.upload(file, {
-      public: true,
-      destination: `/uploads/hashnode/${filename}`,
-      metadata: {
-          firebaseStorageDownloadTokens: uuidv4(),
-      }
-  });
+    //let fileUpload = bucket.file(newFileName)
+
+    //   const blobWriter = blob.createWriteStream({
+    //     metadata: {
+    //         contentType: req.file.mimetype
+    //     }
+    // })
+    // blobStream.on('finish', async () => {
+    //   await fileUpload.makePublic()
+    //   req.file.firebaseUrl = `https://storage.googleapis.com/${BUCKET}/${fileUpload.name}`
+
+    // })
+
+    // blobWriter.end(req.file.buffer)
+    res
+      .status(200)
+      .render('formulario', { message: 'product created successfully' })
+    // res.status(200).send({ message: 'product created successfully' })
+  } catch (err) {
+    res.status(400).json({ error: err })
+  }
 }
 
- 
-
-
-  module.exports = {
-    createProduct,
-    uploadphoto
-    
-  };
+module.exports = {
+  createProduct,
+}

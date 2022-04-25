@@ -1,10 +1,12 @@
-form(action="/createproduct", method="POST") 
+form(action="/createproduct",enctype='multipart/form-data', method="POST") 
     label(for="name") Nombre:
     input(type="text", name="name")
     label(for="price") Precio:
     input(type="text", name="price")
     label(for="description") Descripcion:
     input(type="text", name="description")
-    label(for="img") Imagen:
-    input(type="file", name="img")
+    label(for="file") Imagen:
+    input(type="file", name="imageupload")
     input(type="submit", value="Guardar")
+
+div= message
